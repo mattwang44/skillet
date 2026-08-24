@@ -1,0 +1,8 @@
+{
+  "name": "pydocs-zhtw",
+  "version": "0.1.0",
+  "description": "Translate CPython official documentation PO files into Traditional Chinese (zh_TW) for python/python-docs-zh-tw, following that project's conventions.",
+  "author": { "name": "mattwang44" },
+  "license": "MIT",
+  "keywords": ["translation", "i18n", "l10n", "gettext", "po", "zh_TW", "python", "sphinx", "rest"]
+}

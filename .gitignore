@@ -1,0 +1,10 @@
+.DS_Store
+__pycache__/
+*.py[cod]
+.venv/
+node_modules/
+
+# The leak gate's personal blocklist must never live in this repo.
+# It belongs at ~/.config/skillet/blocklist.txt
+blocklist.txt
+.skillet-blocklist

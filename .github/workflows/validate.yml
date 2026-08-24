@@ -1,0 +1,26 @@
+name: validate
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: marketplace.json is current
+        run: python3 scripts/build_marketplace.py --check
+
+      - name: skills follow the authoring rules
+        run: python3 scripts/validate_skills.py
+
+      # The personal blocklist is deliberately absent from this repo, so CI can
+      # only run the generic shape rules. The full gate runs locally pre-commit.
+      - name: no credentials or private identifiers
+        run: python3 scripts/check_leaks.py --all --generic-only

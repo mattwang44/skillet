@@ -1,0 +1,8 @@
+{
+  "name": "explain",
+  "version": "0.1.0",
+  "description": "Explainer skills. /explain:eli5 turns any topic into a dead-simple HTML picture explainer with big visuals and few words.",
+  "author": { "name": "mattwang44" },
+  "license": "MIT",
+  "keywords": ["explain", "eli5", "learning", "explainer", "html", "artifact"]
+}

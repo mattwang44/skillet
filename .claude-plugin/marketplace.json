@@ -1,0 +1,58 @@
+{
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "skillet",
+  "owner": {
+    "name": "mattwang44"
+  },
+  "metadata": {
+    "description": "Matt's personal Claude Code marketplace: the skills he actually uses, iterated in public.",
+    "pluginRoot": "./plugins"
+  },
+  "plugins": [
+    {
+      "name": "explain",
+      "description": "Explainer skills. /explain:eli5 turns any topic into a dead-simple HTML picture explainer with big visuals and few words.",
+      "source": "./plugins/explain",
+      "version": "0.1.0",
+      "tags": [
+        "explain",
+        "eli5",
+        "learning",
+        "explainer",
+        "html",
+        "artifact"
+      ]
+    },
+    {
+      "name": "pydocs-zhtw",
+      "description": "Translate CPython official documentation PO files into Traditional Chinese (zh_TW) for python/python-docs-zh-tw, following that project's conventions.",
+      "source": "./plugins/pydocs-zhtw",
+      "version": "0.1.0",
+      "tags": [
+        "translation",
+        "i18n",
+        "l10n",
+        "gettext",
+        "po",
+        "zh_TW",
+        "python",
+        "sphinx",
+        "rest"
+      ]
+    },
+    {
+      "name": "skillsmith",
+      "description": "The workshop for this marketplace. /skillsmith:curating-skills is the single door for adding, editing, splitting, or deleting any skill in skillet.",
+      "source": "./plugins/skillsmith",
+      "version": "0.1.0",
+      "tags": [
+        "skill",
+        "meta",
+        "marketplace",
+        "plugin",
+        "authoring",
+        "curation"
+      ]
+    }
+  ]
+}
