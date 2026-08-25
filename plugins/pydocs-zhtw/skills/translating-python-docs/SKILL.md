@@ -15,9 +15,12 @@ carries a count, that is how often reviewers actually had to fix it.
 ## Before starting
 
 ```bash
-poglossary --help          # pip install poglossary if missing
-ls poglossary.yml          # the repo's enforced glossary
+ls glossary.po focused_terminology_dictionary.csv   # the terminology sources
 ```
+
+**Nothing enforces terminology.** CI runs `make all` and nothing else; the only
+pre-commit hook is `powrap`. Every rule below is settled by a reviewer reading
+the diff, which is why Step 5 ends in you reading it first.
 
 `make build` needs a sibling CPython checkout at `../cpython` and the venv at
 `~/.venvs/python-docs-i18n/`. Translation and linting work without it.
@@ -68,8 +71,8 @@ grep -rn "術語" --include=*.po . | head                     # the project's us
 Terminology disputes dominate review. Walk this ladder in order and stop at the
 first hit — do not invent a rendering:
 
-1. `poglossary.yml` in the repo root — the only source CI enforces
-2. `glossary.po`, or <https://docs.python.org/zh-tw/3/glossary.html>
+1. `glossary.po`, or <https://docs.python.org/zh-tw/3/glossary.html>
+2. `focused_terminology_dictionary.csv` in the repo root
 3. The same file, then the rest of the repo (`grep -rn --include=*.po`)
 4. [術語列表 Wiki](https://github.com/python/python-docs-zh-tw/wiki/%E8%A1%93%E8%AA%9E%E5%88%97%E8%A1%A8) (73 comments cite it)
 5. [樂詞網 / 國家教育研究院](https://terms.naer.edu.tw/) (24 comments cite it)
@@ -153,15 +156,16 @@ need translation"); docstrings that a doctest displays are not.
 Do not report a file as done before this loop passes.
 
 ```bash
-poglossary <file>.po poglossary.yml   # glossary violations
-make lint                             # sphinx-lint: broken reST
-make wrap                             # normalize to 79 chars — run last, it rewrites
+make lint            # sphinx-lint: broken reST — exit code decides
+make wrap            # normalize to 79 chars — run last, it rewrites
+git diff <file>.po   # read every changed msgstr against the ladder in Step 3
 ```
 
-On failure: read the message, fix the entry, rerun from `poglossary`.
+On failure: read the message, fix the entry, rerun from `make lint`.
 
-A genuine false positive is fixed with an `ignore.patterns` entry in
-`poglossary.yml`, never by rewording the translation to dodge the check.
+`make lint` checks reST and `make wrap` checks width. Neither knows 函數 from
+函式, so the diff read is the terminology check — it is not a formality, and
+skipping it is what puts the corrections in Step 6's list back on a reviewer.
 
 ### Step 6 — Self-review against the checklist
 
@@ -215,7 +219,7 @@ tutorial/classes.po: 翻譯 class 定義章節
 | Inventing a rendering for an unlisted term | Review round trip; the answer was usually "keep the English" |
 | Hand-wrapping to 79 chars | `make wrap` reflows differently; noisy diff |
 | Leaving `#, fuzzy` on a finished entry | Entry does not ship |
-| Reporting done without `poglossary` | zh_CN forms reach review |
+| Reporting done without reading the diff | zh_CN forms reach review |
 
 ## References
 

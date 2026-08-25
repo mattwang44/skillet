@@ -19,8 +19,8 @@ three years of PRs. They are a priority signal, not a complete list.
 Terminology dominates review discussion. Walk this in order, stop at the first hit,
 and do not invent a rendering.
 
-1. **`poglossary.yml`** in the repo root — the only source CI enforces
-2. **`glossary.po`**, or <https://docs.python.org/zh-tw/3/glossary.html>
+1. **`glossary.po`**, or <https://docs.python.org/zh-tw/3/glossary.html>
+2. **`focused_terminology_dictionary.csv`** in the repo root
 3. **The file you are editing**, then the rest of the repo:
    `grep -rn "<term>" --include=*.po .`
 4. **[術語列表 Wiki](https://github.com/python/python-docs-zh-tw/wiki/%E8%A1%93%E8%AA%9E%E5%88%97%E8%A1%A8)** — cited in 73 review comments
@@ -130,8 +130,8 @@ examples where review concluded "keep the English".
 
 ## Terms with more than one accepted rendering
 
-`poglossary.yml` maps these to a *list*, so more than one form passes. Match the
-file you are editing rather than normalizing.
+More than one form is in active use for each of these. Match the file you are
+editing rather than normalizing.
 
 | English | Accepted |
 |---|---|
@@ -227,9 +227,9 @@ the one in play. Check any word that could plausibly be two things:
 
 ## Known conflicts between sources
 
-- **`import`** — the focused dictionary says 引入; `poglossary.example.yml` marks it
-  `import  # no trans`. Follow the repo's own `poglossary.yml`, and keep `import`
-  in English when it names the statement.
+- **`import`** — the focused dictionary says 引入. Keep `import` in English when
+  it names the statement or the keyword; translate it only where it reads as an
+  ordinary verb.
 - **`type`** — 型別 for a Python type object, 類型 for a general category such as
   「presentation type」. Both appear legitimately.
 - **`annotation`** — 註釋 by the rule above, but 標注 appears in the wild. Match the

@@ -1,8 +1,17 @@
 {
   "name": "skillsmith",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "The workshop for this marketplace. /skillsmith:curating-skills is the single door for adding, editing, splitting, or deleting any skill in skillet.",
-  "author": { "name": "mattwang44" },
+  "author": {
+    "name": "mattwang44"
+  },
   "license": "MIT",
-  "keywords": ["skill", "meta", "marketplace", "plugin", "authoring", "curation"]
+  "keywords": [
+    "skill",
+    "meta",
+    "marketplace",
+    "plugin",
+    "authoring",
+    "curation"
+  ]
 }

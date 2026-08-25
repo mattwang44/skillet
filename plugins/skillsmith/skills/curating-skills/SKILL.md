@@ -158,11 +158,12 @@ Commit as `<type>(<plugin>): <what changed>`, and put the Step 1 observation in 
 body — that is the record of *why*, and future-you will want it:
 
 ```
-fix(pydocs-zhtw): require poglossary run before reporting a file done
+fix(pydocs-zhtw): terminology is settled in review, not by a checker
 
-Observed: agent translated library/asyncio-task.po, reported "done", and
-CI failed on 「函數」in three entries. The skill listed poglossary under
-References but never made running it a step.
+Observed: agent finished library/asyncio-task.po, ran the validators the
+skill listed, and reported done with 「函數」still in three entries. The
+skill described a checker that does not exist in python-docs-zh-tw --
+upstream CI only runs `make all` -- so nothing ever read the wording.
 ```
 
 ## Rationalizations

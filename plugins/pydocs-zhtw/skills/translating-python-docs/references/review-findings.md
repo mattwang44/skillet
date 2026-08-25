@@ -110,8 +110,9 @@ reads the surrounding entries before translating anything.
 - **Reviewer mix.** A handful of maintainers account for most comments, so this
   measures their preferences as much as the project's written rules. Where the two
   disagreed, the written rule in `README.rst` was preferred.
-- **Recency.** Conventions drift. A count from three years of history can be stale;
-  the enforced source is always `poglossary.yml` plus `make lint`.
+- **Recency.** Conventions drift. A count from three years of history can be
+  stale, and nothing enforces terminology automatically — `make lint` checks reST
+  only, so a reviewer is the enforcement.
 - **No baseline for the skill itself.** This measures human translators being
   corrected. It does not measure an agent using this skill and being corrected,
   which is the observation that should drive the next revision.

@@ -1,6 +1,6 @@
 {
   "name": "pydocs-zhtw",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Translate CPython official documentation PO files into Traditional Chinese (zh_TW) for python/python-docs-zh-tw, following that project's conventions.",
   "author": {
     "name": "mattwang44"
