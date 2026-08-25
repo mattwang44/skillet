@@ -11,7 +11,8 @@ Two rule sets:
             in ~/.config/skillet/blocklist.txt (override with $SKILLET_BLOCKLIST).
             This is where employer, product, service, and colleague names live.
             A public repo that ships a list of company keywords has already
-            leaked the list.
+            leaked the list. A "#" comments out the rest of the line only when
+            followed by whitespace or end of line, so "#channel" stays a pattern.
 
 A missing personal blocklist is a hard failure, not a warning: the gate will not
 certify what it cannot check. Use --generic-only where a personal list cannot
@@ -69,6 +70,17 @@ GENERIC_RULES: list[tuple[str, re.Pattern[str]]] = [
 TICKET_KEY = re.compile(r"\b([A-Z][A-Z0-9]{1,9})-\d{3,6}\b")
 EMAIL = re.compile(r"\b[\w.+-]+@[\w-]+\.[\w.-]+\b")
 
+# A "#" starts a comment only when it stands alone: at line start or after
+# whitespace, AND followed by whitespace or end of line. So "# note" and
+# "\bfoo\b  # note" are comments, while "#channel" and "docs#anchor" stay part of
+# the regex. Truncating a pattern mid-regex is how a blocklist silently stops
+# matching what it was written to match.
+COMMENT = re.compile(r"(?:^|\s)#(?=\s|$)")
+
+# Neutral filler no real blocklist entry should match. A pattern that matches it
+# matches nearly every line, which is what a silently truncated regex looks like.
+CANARY = "zzz qqq vvv 000 ___ ---"
+
 
 def load_blocklist(generic_only: bool) -> list[tuple[str, re.Pattern[str]]]:
     if generic_only:
@@ -87,13 +99,21 @@ def load_blocklist(generic_only: bool) -> list[tuple[str, re.Pattern[str]]]:
 
     rules = []
     for lineno, raw in enumerate(path.read_text(encoding="utf-8").splitlines(), 1):
-        line = raw.split("#", 1)[0].strip()
+        comment = COMMENT.search(raw)
+        line = (raw[: comment.start()] if comment else raw).strip()
         if not line:
             continue
         try:
-            rules.append((f"blocklist:{line}", re.compile(line, re.IGNORECASE)))
+            pattern = re.compile(line, re.IGNORECASE)
         except re.error as exc:
             raise SystemExit(f"{path}:{lineno}: invalid regex {line!r}: {exc}")
+        if pattern.search(CANARY):
+            raise SystemExit(
+                f"{path}:{lineno}: pattern {line!r} matches ordinary text, so it "
+                f"would flag every line and the gate would certify nothing.\n"
+                f"  Tighten it, or anchor the part that is actually private."
+            )
+        rules.append((f"blocklist:{line}", pattern))
     if not rules:
         raise SystemExit(f"{path}: blocklist is empty; add at least one pattern")
     return rules

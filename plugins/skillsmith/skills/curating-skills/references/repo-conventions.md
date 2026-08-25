@@ -69,10 +69,16 @@ Keeping set 2 outside the repo is the point: a public repo that ships a list of
 company keywords has leaked the list. A missing blocklist file is a hard failure,
 not a warning — the gate refuses to certify what it cannot check.
 
+A `#` comments out the rest of a blocklist line only when it is followed by a
+space or the end of the line, so `#channel-name` and `docs#anchor` stay part of
+the pattern. The gate also rejects any pattern broad enough to match ordinary
+prose, because that is what a half-truncated regex looks like and it would flag
+every line while certifying nothing.
+
 ```bash
 # create it
 mkdir -p ~/.config/skillet
-$EDITOR ~/.config/skillet/blocklist.txt   # one case-insensitive regex per line, # for comments
+$EDITOR ~/.config/skillet/blocklist.txt   # one case-insensitive regex per line
 ```
 
 ## Marketplace regeneration
