@@ -27,7 +27,7 @@
       "name": "pydocs-zhtw",
       "description": "Translate CPython official documentation PO files into Traditional Chinese (zh_TW) for python/python-docs-zh-tw, following that project's conventions.",
       "source": "./plugins/pydocs-zhtw",
-      "version": "0.1.0",
+      "version": "0.2.0",
       "tags": [
         "translation",
         "i18n",
