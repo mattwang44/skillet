@@ -4,30 +4,7 @@ My personal Claude Code marketplace. The skills I actually use, iterated in publ
 
 ```bash
 claude plugin marketplace add mattwang44/skillet
-claude plugin install skillsmith@skillet
 ```
-
-## Why this exists
-
-I use Claude Code all day — Python backend work, infra, and side projects — and I
-kept accumulating skills in three places: a work marketplace I can't publish, a
-translation project's repo, and scratch files. This is where the general ones live
-so I can keep sharpening them.
-
-Three rules keep it useful rather than just large:
-
-1. **Nothing employer-specific.** This repo is public and must not know anything
-   about any employer — no internal names, tickets, hosts, or tables. A gate in
-   `scripts/check_leaks.py` enforces it, backed by a personal blocklist kept
-   outside the repo on purpose.
-2. **Skills earn their place by failing first.** Nothing gets added or edited
-   without a concrete moment where an agent did the wrong thing. See the Iron Law
-   in `curating-skills`.
-3. **Short beats thorough.** `eli5` is four lines and works. The model is already
-   smart; the only tokens worth spending are on what it doesn't already know.
-
-It's built for one user, so it optimizes for iteration speed over generality. Take
-anything you find useful.
 
 ## Plugins
 
@@ -38,38 +15,25 @@ anything you find useful.
 | `explain` | `eli5` | Any topic as an HTML picture explainer with big visuals and few words |
 
 ```bash
+claude plugin install skillsmith@skillet
 claude plugin install pydocs-zhtw@skillet
 claude plugin install explain@skillet
 ```
 
-### skillsmith / curating-skills
+## Why this exists
 
-The meta-skill. Every change to this repo goes through it, and it refuses to let me
-edit a `SKILL.md` until I've written down what actually went wrong. It routes
-new-vs-edit-vs-split-vs-delete, picks the *form* of the fix from the *shape* of the
-failure, verifies in a fresh context rather than my contaminated one, and runs the
-leak gate before anything is committed.
+Skills kept accumulating in places I can't publish or share. This is where the
+general ones live so I can keep sharpening them. Three rules keep it useful rather
+than just large:
 
-The discipline is the point. Without it a personal skill collection becomes a pile
-of plausible-sounding markdown that nobody, including me, trusts.
+1. **Nothing employer-specific.** `scripts/check_leaks.py` enforces it, backed by a
+   personal blocklist kept outside the repo on purpose.
+2. **Skills earn their place by failing first.** Nothing gets added or edited
+   without a concrete moment where an agent did the wrong thing.
+3. **Short beats thorough.** `eli5` is four lines and works.
 
-### pydocs-zhtw / translating-python-docs
-
-I translate the Python official docs into Traditional Chinese. The upstream repo
-has skills already, but they split translate / check-terminology / validate across
-three files I had to remember to chain, and mixed reST mechanics with prose
-judgment.
-
-This is one entry point covering the whole loop, and it treats validation as a
-numbered step with real commands ([`poglossary`](https://github.com/mattwang44/poglossary),
-`make lint`, `make wrap`) rather than a closing suggestion — which is what let
-zh_CN wording reach review before.
-
-### explain / eli5
-
-A near-verbatim mirror of [@trq212's `eli5`](https://github.com/anthropics/claude-plugins-community/tree/main/eli5),
-MIT, credited in `CREDITS.md`. Kept as-is because it's the taste benchmark for
-this repo.
+Built for one user, so it optimizes for iteration speed over generality. Take
+anything you find useful.
 
 ## Local development
 
@@ -81,6 +45,7 @@ claude plugin marketplace update skillet            # after each change
 
 ```bash
 python3 scripts/build_marketplace.py --check   # marketplace.json is generated, not written
+python3 scripts/validate_skills.py
 python3 scripts/check_leaks.py --all           # needs ~/.config/skillet/blocklist.txt
 ```
 
@@ -93,4 +58,5 @@ $EDITOR ~/.config/skillet/blocklist.txt   # one case-insensitive regex per line
 
 ## License
 
-MIT.
+MIT. `eli5` is a near-verbatim mirror of [@trq212's skill](https://github.com/anthropics/claude-plugins-community/tree/main/eli5),
+credited in `plugins/explain/skills/eli5/CREDITS.md`.
