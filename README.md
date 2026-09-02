@@ -13,11 +13,13 @@ claude plugin marketplace add mattwang44/skillet
 | `skillsmith` | `curating-skills` | The single door for changing anything in this repo |
 | `pydocs-zhtw` | `translating-python-docs` | Translating CPython docs into Traditional Chinese for [python-docs-zh-tw](https://github.com/python/python-docs-zh-tw) |
 | `explain` | `eli5` | Any topic as an HTML picture explainer with big visuals and few words |
+| `doc-craft` | `crafting-docs` | Writing and reviewing formal engineering docs (proposals, RFCs, runbooks, how-to guides), with a zh-TW language layer and Confluence API-editing traps |
 
 ```bash
 claude plugin install skillsmith@skillet
 claude plugin install pydocs-zhtw@skillet
 claude plugin install explain@skillet
+claude plugin install doc-craft@skillet
 ```
 
 ## Why this exists

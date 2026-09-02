@@ -10,6 +10,22 @@
   },
   "plugins": [
     {
+      "name": "doc-craft",
+      "description": "Formal engineering document craft. /doc-craft:crafting-docs — battle-tested rules for proposals, RFCs, runbooks, and how-to guides, with a zh-TW language layer and Confluence API-editing traps.",
+      "source": "./plugins/doc-craft",
+      "version": "0.1.0",
+      "tags": [
+        "documentation",
+        "technical-writing",
+        "runbook",
+        "proposal",
+        "rfc",
+        "diataxis",
+        "zh_TW",
+        "confluence"
+      ]
+    },
+    {
       "name": "explain",
       "description": "Explainer skills. /explain:eli5 turns any topic into a dead-simple HTML picture explainer with big visuals and few words.",
       "source": "./plugins/explain",

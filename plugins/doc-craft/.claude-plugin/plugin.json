@@ -1,0 +1,17 @@
+{
+  "name": "doc-craft",
+  "version": "0.1.0",
+  "description": "Formal engineering document craft. /doc-craft:crafting-docs — battle-tested rules for proposals, RFCs, runbooks, and how-to guides, with a zh-TW language layer and Confluence API-editing traps.",
+  "author": { "name": "mattwang44" },
+  "license": "MIT",
+  "keywords": [
+    "documentation",
+    "technical-writing",
+    "runbook",
+    "proposal",
+    "rfc",
+    "diataxis",
+    "zh_TW",
+    "confluence"
+  ]
+}
